@@ -134,3 +134,76 @@ class Presenter(var viewInterface: ViewInterface) {
 ### 정리
 
 - 사용자의 액션을 액티비티(뷰)로 받아서 Presenter에 넘겨주고 Presenter가 Model을 비교/가공하여, 인터페이스를 통해 액티비티(뷰)를 변경하도록 되돌려줌
+
+## MVVM 패턴 구현
+
+- ViewModel 클래스 구현
+
+```kotlin
+package com.grusie.mvvmpractice
+
+import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
+
+class ViewModel {
+    var toastMessage = MutableLiveData<Int>()
+    var checkPasswordMessage = ObservableField<Boolean>(false)
+
+    val model = Model()
+
+    fun clickNum(i: Int){
+        toastMessage.value = i
+
+        model.inputPassword(i)
+        if(model.password.size == 4 && model.checkPassword()){
+            checkPasswordMessage.set(true)
+        }
+    }
+}
+```
+
+- MVP에서 만든 인터페이스 부분을 MutableLiveData, ObservableField를 사용하여 변수로 만든다
+- presenter클래스에 있던 코드들을 ViewModel로 옮김
+
+- xml에 데이터 바인딩 부분 수정
+
+```kotlin
+<data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.grusie.mvvmpractice.ViewModel" />
+    </data>
+```
+
+- viewModel을 사용할 것이기 때문
+
+- 메인액티비티 수정
+
+```kotlin
+var viewModel = ViewModel()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding.viewModel = viewModel
+        viewModel.toastMessage.observe(this, Observer {
+            Toast.makeText(this, "$it 버튼이 클릭됨", Toast.LENGTH_SHORT).show()
+        })
+        viewModel.checkPasswordMessage.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback(){
+            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+                if(viewModel.checkPasswordMessage.get() == true){
+                    binding.messageSuccess.visibility = View.VISIBLE
+                }else{
+                    binding.messageSuccess.visibility = View.GONE
+                }
+            }
+        })
+    }
+```
+
+- ViewModel 객체 생성
+- LiveData인 toastMessage는 observe를 사용 observableField인 checkPasswordMessage는 addOnPropertyChangedCallback을 사용해서 사용자의 액션이 들어오면 부분
+
+### 정리
+
+- 사용자의 액션을 View에서 받고, ViewModel이 이를 확인 해, Model에게 데이터를 요청하고 다시 View에 띄워줌
