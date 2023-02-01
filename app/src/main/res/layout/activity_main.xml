@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
-            name="mainActivity"
-            type="com.grusie.mvvmpractice.MainActivity" />
+            name="viewModel"
+            type="com.grusie.mvvmpractice.ViewModel" />
     </data>
 
     <LinearLayout
@@ -25,55 +26,55 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:onClick="@{() -> mainActivity.clickNum(1)}"
+                android:onClick="@{() -> viewModel.clickNum(1)}"
                 android:text="1" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:onClick="@{() -> mainActivity.clickNum(2)}"
+                android:onClick="@{() -> viewModel.clickNum(2)}"
                 android:text="2" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:onClick="@{() -> mainActivity.clickNum(3)}"
+                android:onClick="@{() -> viewModel.clickNum(3)}"
                 android:text="3" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:onClick="@{() -> mainActivity.clickNum(4)}"
+                android:onClick="@{() -> viewModel.clickNum(4)}"
                 android:text="4" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:onClick="@{() -> mainActivity.clickNum(5)}"
+                android:onClick="@{() -> viewModel.clickNum(5)}"
                 android:text="5" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:onClick="@{() -> mainActivity.clickNum(6)}"
+                android:onClick="@{() -> viewModel.clickNum(6)}"
                 android:text="6" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:onClick="@{() -> mainActivity.clickNum(7)}"
+                android:onClick="@{() -> viewModel.clickNum(7)}"
                 android:text="7" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:onClick="@{() -> mainActivity.clickNum(8)}"
+                android:onClick="@{() -> viewModel.clickNum(8)}"
                 android:text="8" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:onClick="@{() -> mainActivity.clickNum(9)}"
+                android:onClick="@{() -> viewModel.clickNum(9)}"
                 android:text="9" />
 
         </GridLayout>
